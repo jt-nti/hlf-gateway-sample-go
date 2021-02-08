@@ -48,7 +48,7 @@ func main() {
 
 // NewIdentity creates a client identity for this Gateway connection using an X.509 certificate
 func newIdentity() (*identity.X509Identity, error) {
-	certificatePEM, err := ioutil.ReadFile("certificate.pem")
+	certificatePEM, err := ioutil.ReadFile("cert.pem")
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func newIdentity() (*identity.X509Identity, error) {
 
 // NewSign creates a function that generates a digital signature from a message digest using a private key
 func newSign() (identity.Sign, error) {
-	privateKeyPEM, err := ioutil.ReadFile("privateKey.pem")
+	privateKeyPEM, err := ioutil.ReadFile("key.pem")
 	if err != nil {
 		return nil, err
 	}
