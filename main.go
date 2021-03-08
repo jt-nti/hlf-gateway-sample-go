@@ -33,17 +33,21 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer gateway.Close()
 
 	network := gateway.GetNetwork("mychannel")
 	contract := network.GetContract("fabcar")
 
-	result, err := contract.EvaluateTransaction("QueryAllCars")
+	result, err := contract.SubmitTransaction("CreateCar", "CAR99", "Nissan", "Leaf", "Green", "Megan")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	result, err = contract.EvaluateTransaction("QueryAllCars")
 	if err != nil {
 		log.Fatalln(err)
 	}
 	log.Println(string(result))
-
-	gateway.Close()
 }
 
 // NewIdentity creates a client identity for this Gateway connection using an X.509 certificate
